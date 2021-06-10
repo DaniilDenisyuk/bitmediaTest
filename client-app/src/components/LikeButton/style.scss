@@ -1,0 +1,26 @@
+.like-button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  border: 0.5px solid #ff6938;
+  background-color: #fff;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  &__heart {
+    display: block;
+    background: url("../../assets/img/heart-passive.png") bottom/contain
+      no-repeat;
+    width: 24px;
+    height: 23px;
+  }
+  &--active {
+    border-color: #df0202 !important;
+  }
+  &--active &__heart {
+    background-image: url("../../assets/img/heart-active.png");
+  }
+  &:hover &__heart {
+    background-image: url("../../assets/img/heart-hover.png");
+  }
+}

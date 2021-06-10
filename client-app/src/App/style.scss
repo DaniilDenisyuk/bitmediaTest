@@ -1,0 +1,125 @@
+$maxWidthContainer: 1300;
+$minWidthContainer: 300;
+
+$b1: 1024;
+$b2: 768;
+$b3: 320;
+
+@import "../assets/sass/fonts";
+@import "../assets/sass/utils/reset";
+@import "../components/styles/form.scss";
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+* {
+  box-sizing: border-box !important;
+}
+
+.row {
+  display: flex;
+}
+
+.mnt {
+  font-family: Monserrat;
+  &-sb {
+    font-family: MontserratSemiBold;
+  }
+  &-b {
+    font-family: MontserratBold;
+  }
+  &-m {
+    font-family: MontserratMedium;
+  }
+}
+
+.rbt {
+  font-family: Roboto;
+  &-b {
+    font-family: RobotoBold;
+  }
+  &-m {
+    font-family: RobotoMedium;
+  }
+}
+
+.fz {
+  &-60 {
+    font-size: 60px;
+  }
+  &-48 {
+    font-size: 48px;
+  }
+  &-36 {
+    font-size: 36px;
+  }
+  &-24 {
+    font-size: 24px;
+  }
+  &-18 {
+    font-size: 18px;
+  }
+  &-14 {
+    font-size: 14px;
+  }
+}
+
+.orange {
+  color: #ff5d29;
+  &-bd {
+    border-color: #ff5d29;
+  }
+  &-bg {
+    background-color: #ff5d29;
+  }
+}
+
+.fadein {
+  animation: fadein 0.3s linear forwards;
+}
+
+.fadeout {
+  animation: fadeout 0.3s linear forwards;
+}
+
+.dropin {
+  animation: dropin 0.2s linear forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dropin {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropout {
+  100% {
+    transform: translateY(-100%);
+  }
+}

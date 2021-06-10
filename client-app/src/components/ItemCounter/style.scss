@@ -1,0 +1,63 @@
+.item-counter {
+  display: flex;
+  align-items: center;
+  &__value {
+    font-family: RobotoMedium;
+    font-size: 14px;
+    text-align: center;
+    width: 30px;
+    color: #000000;
+  }
+  &__btn {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #ffffff;
+    border: 1px solid #7ac74f;
+    background: #ffffff;
+    &::after,
+    &::before {
+      content: "";
+      background: #7ac74f;
+      display: none;
+      position: absolute;
+      height: 2px;
+      width: 15px;
+      border-radius: 3000px;
+    }
+    &::before {
+      transform: rotate(90deg);
+    }
+    &--inc {
+      &::after,
+      &::before {
+        display: block;
+      }
+    }
+    &--dec {
+      &::after {
+        display: block;
+      }
+    }
+    &:hover {
+      background: #7ac74f;
+      &::after,
+      &::before {
+        background: white;
+      }
+    }
+    &:disabled {
+      border-color: #adadad;
+      background: #ffffff;
+      &::after,
+      &::before {
+        background: #adadad;
+      }
+    }
+  }
+}

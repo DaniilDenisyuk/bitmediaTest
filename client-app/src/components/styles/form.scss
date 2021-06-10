@@ -1,0 +1,51 @@
+.form {
+  display: block;
+  line-height: 24px;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #67758d;
+  &__wrapper {
+    width: 350px;
+  }
+  &__heading {
+    font-family: MontserratSemiBold;
+    font-size: 24px;
+    color: #110a3a;
+    margin-bottom: 18px;
+    letter-spacing: 1.5%;
+  }
+  &__form-group {
+    width: 100%;
+    &--half {
+      width: 50%;
+    }
+    margin-bottom: 25px;
+  }
+
+  &__submit {
+    font-family: RobotoMedium;
+    font-size: 20px;
+    height: 56px;
+    width: 100%;
+    margin-top: 40px;
+    border-radius: 7px;
+  }
+  &__tip-message {
+    font-family: Montserrat;
+    font-size: 13px;
+    color: #717171;
+    margin-bottom: 21px;
+  }
+  &__links {
+    margin-top: 60px;
+    color: #67758d;
+  }
+  &__link {
+    font-family: RobotoMedium;
+    margin-left: 10px;
+    color: #ff5d29;
+    &:hover {
+      color: #fa3c00;
+    }
+  }
+}

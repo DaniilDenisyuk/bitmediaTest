@@ -1,0 +1,6 @@
+@import "utils/mixins.scss";
+
+@include font("mb", "Montserrat-Bold", "regular", "normal");
+@include font("mm", "Montserrat-Medium", "regular", "normal");
+@include font("msb", "Montserrat-SemiBold", "regular", "normal");
+@include font("mr", "Montserrat-Regular", "regular", "normal");

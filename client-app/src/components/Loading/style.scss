@@ -1,0 +1,43 @@
+.loading {
+  display: inline-block;
+  &__dots {
+    position: relative;
+    margin-left: 25px;
+    animation-delay: 0.5s;
+    &,
+    &::before,
+    &::after {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: #9880ff;
+      color: #9880ff;
+      animation: dotFlashing 1s infinite alternate;
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+    }
+    &::before {
+      left: -15px;
+      animation-delay: 0s;
+    }
+    &::after {
+      left: 15px;
+      animation-delay: 1s;
+    }
+  }
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #9880ff;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+}

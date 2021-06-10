@@ -1,0 +1,5 @@
+@function adaptVal($maxSize, $minSize, $maxContainer: $maxWidthContainer, $minContainer: $minWidthContainer) {
+   $addSize: $maxSize - $minSize;
+   $result: calc(#{$minSize + px} + #{$addSize} * ((100vw - #{$minContainer + px}) /#{$maxContainer - $minContainer}));
+   @return $result;
+}

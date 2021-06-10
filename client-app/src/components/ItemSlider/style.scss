@@ -1,0 +1,69 @@
+.item-slider {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  margin: -5px;
+  padding: 5px;
+  > [class*="wrapper"] {
+    display: flex;
+  }
+  &__slide {
+  }
+  &__next-el,
+  &__prev-el {
+    padding: 50px 0;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    &::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: url("../../assets//img/arrow.svg") center/contain no-repeat;
+    }
+    &.disabled {
+      display: none;
+    }
+  }
+  &__prev-el {
+    padding-right: 50px;
+    left: 0;
+    &::before {
+      transform: rotate(90deg);
+    }
+  }
+  &__next-el {
+    padding-left: 50px;
+    right: 0;
+    &::before {
+      transform: rotate(-90deg);
+    }
+  }
+  &__veil-start,
+  &__veil-end {
+    z-index: 1;
+    width: 150px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(
+      259.85deg,
+      #ffffff 7.22%,
+      #ffffff 26.03%,
+      rgba(255, 255, 255, 0.98) 36.94%,
+      rgba(255, 255, 255, 0.84) 53.8%,
+      rgba(255, 255, 255, 0) 92.4%
+    );
+  }
+  &__veil-start {
+    left: 0;
+    transform: rotate(-180deg);
+  }
+  &__veil-end {
+    right: 0;
+  }
+}

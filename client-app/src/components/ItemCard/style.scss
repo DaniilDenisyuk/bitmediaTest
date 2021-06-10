@@ -1,0 +1,54 @@
+.item-card {
+  width: 310px;
+  padding: 0px 40px 40px;
+  border-radius: 7px;
+  background-color: #ffff;
+  cursor: pointer;
+  &:hover {
+    z-index: 1;
+    box-shadow: 0px 8px 29px rgba(0, 71, 122, 0.08);
+  }
+  &__wrapper {
+    position: relative;
+  }
+  &__img {
+    position: relative;
+    top: 0;
+    width: 240px;
+    height: 255px;
+    margin-bottom: 10px;
+  }
+  &__name {
+    font-family: MontserratBold;
+    font-size: 24px;
+    color: #232323;
+    margin-bottom: 15px;
+  }
+  &__info {
+    font-family: Montserrat;
+    font-size: 13px;
+    color: #474747;
+    margin-bottom: 20px;
+    span {
+      display: block;
+      color: #404040;
+      margin-bottom: 15px;
+    }
+  }
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+  &__price {
+    font-family: Roboto;
+    color: #101010;
+    font-size: 20px;
+  }
+  &__add-button {
+    font-family: MontserratMedium;
+    font-size: 14px;
+    width: 130px;
+    height: 40px;
+    margin-left: auto;
+  }
+}

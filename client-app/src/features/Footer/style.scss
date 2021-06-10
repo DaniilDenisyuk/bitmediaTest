@@ -1,0 +1,88 @@
+.footer {
+  display: flex;
+  background: #182f37;
+  margin-top: auto;
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  &__row {
+    display: flex;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+
+  &__list {
+    &--info {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    &--support {
+      display: flex;
+      justify-content: center;
+      grid-column-start: 3;
+      grid-column-end: 6;
+    }
+    &--contacts {
+      display: flex;
+      justify-content: center;
+      grid-column-start: 6;
+      grid-column-end: 8;
+    }
+    &--account {
+      grid-column-start: 9;
+      grid-column-end: 11;
+    }
+
+    &--additional {
+      display: flex;
+      justify-content: flex-end;
+      grid-column-start: 11;
+      grid-column-end: 13;
+    }
+  }
+
+  &__copyright {
+    color: #ffffff;
+    margin-top: 20px;
+    font-family: Roboto;
+    font-size: 13px;
+    text-align: center;
+    line-height: 20px;
+  }
+}
+
+.footer-list {
+  &__heading {
+    color: #ffffff;
+    font-family: RobotoMedium;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  &__link {
+    display: block;
+    padding: 5px 0;
+    color: #afafaf;
+    font-family: Roboto;
+    font-size: 14px;
+    &:hover {
+      color: #ff5d29;
+    }
+  }
+  .i-phone {
+    display: flex;
+    &::before {
+      content: "";
+      display: inline-block;
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      background: url("../../assets/img/phone.svg") center/contain no-repeat;
+    }
+  }
+}

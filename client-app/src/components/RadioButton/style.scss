@@ -1,0 +1,21 @@
+.radio-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: MontserratSemiBold;
+  font-size: 12px;
+  color: #343434;
+  input {
+    display: none;
+  }
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    margin-right: 16px;
+    border-radius: 50%;
+    border: 1px solid #7ac74f;
+  }
+  input:checked + &__checkbox {
+    border-width: 4px;
+  }
+}
