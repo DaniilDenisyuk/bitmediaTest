@@ -2,15 +2,18 @@
   width: 100%;
   &__header {
     background-color: transparent;
+    .header__links {
+      display: none;
+    }
   }
   &__wrapper {
   }
   &__banner {
-    padding-top: 1.5rem;
+    padding-top: 24px;
   }
   &__content {
     display: flex;
-    padding: 1rem 0 8rem;
+    padding: 16px 0 128px;
     text-align: center;
     flex-direction: column;
     align-items: center;
@@ -110,7 +113,7 @@
 }
 
 .some-card {
-  padding: 3rem 2rem;
+  padding: 48px 32px;
   width: 380px;
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);

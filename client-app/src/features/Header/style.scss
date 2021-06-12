@@ -11,4 +11,25 @@
   &__heading {
     font-size: (40rem/16);
   }
+  &__links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  &__link {
+    margin: 30px;
+    display: block;
+    font-size: 2rem;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      margin-top: 0.1rem;
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+    }
+  }
 }

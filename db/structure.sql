@@ -13,7 +13,7 @@ ADD
 
 CREATE TABLE users_statistics (
   user_id integer not null,
-  date varchar(31) not null,
+  date integer not null,
   clicks integer,
   page_views integer
 );

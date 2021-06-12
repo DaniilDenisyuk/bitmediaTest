@@ -12,7 +12,9 @@ const Main = () => {
   const { path } = useRouteMatch();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(statsActions.getUsers(0, baseRowsCount * basePagesCount));
+    dispatch(
+      statsActions.getUsers(baseRowsCount * basePagesCount, "forward", 1)
+    );
   }, [dispatch]);
   return (
     <Switch>

@@ -26,7 +26,8 @@
   font-size: 0.85rem;
   position: relative;
   &__selected {
-    width: 200px;
+    width: 206px;
+    cursor: pointer;
     font-size: 0.75rem;
     margin-left: 15px;
     display: flex;
@@ -34,8 +35,20 @@
     background: #ffffff;
     border: 1px solid #f1f1f1;
     border-radius: 5px;
-    padding: 0 15px;
+    padding: 0 15px 0 4px;
     height: 2rem;
+    &::before {
+      display: block;
+      margin-right: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 3px;
+      background-color: #3a80ba;
+      content: "";
+      background-image: url("../../../assets/img/calendar.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
   &__wrapper {
     margin: 0 -10px;

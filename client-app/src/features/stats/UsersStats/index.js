@@ -1,8 +1,13 @@
 import cn from "classnames";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStatsUser, getStatsUsersId } from "../../../common/selectors";
+import {
+  getStatsUser,
+  getStatsUsersId,
+  getStatsUsersCursor,
+} from "../../../common/selectors";
 import { useHistory } from "react-router";
+import { statsActions } from "../statsSlice";
 import Loading from "../../../components/Loading";
 import "./style.scss";
 
@@ -38,11 +43,12 @@ const UserRow = ({ userId }) => {
 const UsersStats = ({ className }) => {
   const dispatch = useDispatch();
   const [pageOffset, setPageOffset] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const usersId = useSelector(getStatsUsersId);
-  const lastPage = 1 + Math.floor(usersId.length / baseRowsCount);
+  const cursor = useSelector(getStatsUsersCursor);
+  const lastPage = Math.floor(usersId.length / baseRowsCount);
   const pageButtons = [];
-  for (let i = pageOffset * basePagesCount + 1; i < lastPage; i++) {
+  for (let i = 0; i < lastPage; i++) {
     pageButtons.push(
       <button
         key={`page-${i}`}
@@ -50,7 +56,7 @@ const UsersStats = ({ className }) => {
         className="stat__page-btn"
         onClick={() => setCurrentPage(i)}
       >
-        {i}
+        {i + pageOffset * basePagesCount + 1}
       </button>
     );
   }
@@ -72,28 +78,42 @@ const UsersStats = ({ className }) => {
           <th width="12%">Total page views</th>
         </tr>
         {tableRows.slice(
-          (currentPage - 1) * baseRowsCount,
-          currentPage * baseRowsCount
+          currentPage * baseRowsCount,
+          (currentPage + 1) * baseRowsCount
         )}
       </table>
       <div className="stat__pagination">
         <span
           className={cn("stat__skip-prev nav-arrow nav-arrow--left", {
-            "nav-arrow--disabled": pageOffset === 0,
+            "nav-arrow--disabled": !cursor.prevEl,
           })}
           onClick={() => {
-            if (pageOffset > 0) setPageOffset(pageOffset - 1);
+            dispatch(
+              statsActions.getUsers(
+                basePagesCount * baseRowsCount,
+                "backward",
+                cursor.prevEl
+              )
+            );
+            setPageOffset(pageOffset - 1);
+            setCurrentPage(0);
           }}
         />
         {pageButtons}
         <span
           className={cn("stat__skip-next nav-arrow nav-arrow--right", {
-            "nav-arrow--disabled":
-              (pageOffset + 1) * basePagesCount >= lastPage,
+            "nav-arrow--disabled": !cursor.nextEl,
           })}
           onClick={() => {
-            if (!((pageOffset + 1) * basePagesCount >= lastPage))
-              setPageOffset(pageOffset + 1);
+            dispatch(
+              statsActions.getUsers(
+                basePagesCount * baseRowsCount,
+                "forward",
+                cursor.nextEl
+              )
+            );
+            setPageOffset(pageOffset + 1);
+            setCurrentPage(0);
           }}
         />
       </div>

@@ -4,12 +4,16 @@ const statsState = {
   isUsersLoading: false,
   isUsersSucceeded: false,
   isUsersFailed: false,
+  cursor: {
+    prevEl: null,
+    nextEl: 1,
+  },
   users: [],
   usersId: [],
   isStatsLoading: false,
   isStatsSucceeded: false,
   isStatsFailed: false,
-  usersStats: [],
+  usersStats: {},
 };
 
 export const statsConstants = {
@@ -30,7 +34,7 @@ export const statsReducer = (state = statsState, action) => {
       };
     }
     case statsConstants.getUsersSucceeded: {
-      const { users } = action.payload;
+      const { cursor, users } = action.payload;
       return {
         ...state,
         isUsersLoading: false,
@@ -38,6 +42,7 @@ export const statsReducer = (state = statsState, action) => {
         isUsersSucceeded: true,
         usersId: users.map((user) => user.id),
         users,
+        cursor,
       };
     }
     case statsConstants.getUsersFailed: {
@@ -52,13 +57,13 @@ export const statsReducer = (state = statsState, action) => {
       return { ...state, isUserStatsLoading: true };
     }
     case statsConstants.getUserStatsSucceeded: {
-      const { userStats } = action.payload;
+      const { userId, userStats } = action.payload;
       return {
         ...state,
         isUserStatsLoading: false,
         isUserStatsFailed: false,
         isUserStatsSucceeded: true,
-        usersStats: state.usersStats.concat(userStats),
+        usersStats: { ...state.userStats, [userId]: userStats },
       };
     }
     case statsConstants.getUserStatsFailed: {
@@ -74,13 +79,13 @@ export const statsReducer = (state = statsState, action) => {
   }
 };
 
-const getUsers = (from, to) => {
+const getUsers = (amount, direction, startId) => {
   const request = () => ({
     type: statsConstants.getUsersRequest,
   });
-  const success = (users) => ({
+  const success = ({ cursor, users }) => ({
     type: statsConstants.getUsersSucceeded,
-    payload: { users },
+    payload: { cursor, users },
   });
   const failure = () => ({
     type: statsConstants.getUsersFailed,
@@ -88,19 +93,19 @@ const getUsers = (from, to) => {
   return (dispatch) => {
     dispatch(request());
     return statsService
-      .getUsers(from, to)
-      .then((users) => dispatch(success(users)))
+      .getUsers(amount, direction, startId)
+      .then((res) => dispatch(success(res)))
       .catch(() => dispatch(failure));
   };
 };
 
-const getUserStats = (userId) => {
+const getUserStats = (userId, from, to) => {
   const request = () => ({
     type: statsConstants.getUserStatsRequest,
   });
   const success = (userStats) => ({
     type: statsConstants.getUserStatsSucceeded,
-    payload: { userStats },
+    payload: { userId, userStats },
   });
   const failure = () => ({
     type: statsConstants.getUserStatsFailed,
@@ -108,7 +113,7 @@ const getUserStats = (userId) => {
   return (dispatch) => {
     dispatch(request());
     return statsService
-      .getUserStats(userId)
+      .getUserStats(userId, from, to)
       .then((userStats) => dispatch(success(userStats)))
       .catch(() => dispatch(failure));
   };

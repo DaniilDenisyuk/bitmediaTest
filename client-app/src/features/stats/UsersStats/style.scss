@@ -15,14 +15,15 @@
     }
     td {
       height: 2rem;
+      white-space: nowrap;
     }
     th,
     td {
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-right: 1.5rem;
+      padding-right: 24px;
       vertical-align: middle;
-      padding-left: 1.5rem;
+      padding-left: 24px;
       border-right: 1px solid #ffffff;
     }
     th:last-child,

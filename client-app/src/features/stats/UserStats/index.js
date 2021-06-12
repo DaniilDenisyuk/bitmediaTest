@@ -44,52 +44,42 @@ const UserChart = ({ className, title, XYvalues }) => {
 };
 
 const convertDate = (dateObject) => {
-  const [, mmm, d, yyyy] = dateObject.toDateString().split(" ");
-  return `${d} ${mmm}, ${yyyy}`;
+  const [, mmm, , yyyy] = dateObject.toDateString().split(" ");
+  return `${mmm} ${dateObject.getDate()}, ${yyyy}`;
 };
 const UserStats = ({ className }) => {
   const { id } = useParams();
   const name = useSelector(getStatsUserName(id));
   const userStats = useSelector(getStatsUserStats(id));
-  const now = useCallback(() => new Date(), []);
   const [startDate, setStartDate] = useState(
-    new Date(now().getTime() - 7 * 24 * 60 * 60 * 1000)
+    new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
   );
-  const [endDate, setEndDate] = useState(now());
+  const [endDate, setEndDate] = useState(new Date());
   const [filterOpened, setFilterOpened] = useState(false);
 
-  const userStatsRange = useCallback(
-    () =>
-      userStats.filter((stat) => {
-        const date = new Date(stat.date);
-        return (
-          startDate.getTime() < date.getTime() &&
-          date.getTime() < endDate.getTime()
-        );
-      }),
-    [userStats, startDate, endDate]
-  );
   const clickStatsXY = useCallback(
     () =>
-      userStatsRange().map(({ date, clicks }) => ({
+      userStats.map(({ date, clicks }) => ({
         x: new Date(date),
         y: clicks,
       })),
-    [userStatsRange]
+    [userStats]
   );
   const viewsStatsXY = useCallback(
     () =>
-      userStatsRange().map(({ date, page_views }) => ({
+      userStats.map(({ date, page_views }) => ({
         x: new Date(date),
         y: page_views,
       })),
-    [userStatsRange]
+    [userStats]
   );
-
+  console.log(viewsStatsXY());
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(statsActions.getUserStats(id));
-  }, [id, dispatch]);
+    dispatch(
+      statsActions.getUserStats(id, startDate.getTime(), endDate.getTime())
+    );
+  }, [id, startDate, endDate, dispatch]);
 
   return (
     <section className="user-stats __container">

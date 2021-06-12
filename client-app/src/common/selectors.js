@@ -8,11 +8,10 @@ export const getStatsUser = (userId) => (store) => {
   return index >= 0 ? users[index] : {};
 };
 export const getStatsUserStats = (userId) => (store) => {
-  const usersStats = getStatsState(store).usersStats;
-  const index = usersStats.findIndex((stat) => stat.userId === userId);
-  return index >= 0 ? usersStats[index].stats : [];
+  return getStatsState(store).usersStats[userId] || [];
 };
 export const getStatsUserName = (userId) => (store) => {
   const { first_name, last_name } = getStatsUser(userId)(store);
   return `${first_name || ""} ${last_name || ""}`;
 };
+export const getStatsUsersCursor = (store) => getStatsState(store).cursor;

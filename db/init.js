@@ -57,7 +57,10 @@ const ParseJSONDirFiles = async (dirPath) => {
           params[i] = new Array(keys.length);
           let j = 0;
           for (const key of keys) {
-            args[i * keys.length + j] = dataRow[key];
+            let data = dataRow[key];
+            //if date parse to milliseconds
+            if (key.includes("date")) data = new Date(data).getTime();
+            args[i * keys.length + j] = data;
             params[i][j] = "?";
             j++;
           }
