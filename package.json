@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "test task",
   "type": "module",
-  "main": "none",
+  "main": "app.js",
   "scripts": {
     "start": "node app",
     "build": "npm install && cd client-app && npm install && npm run build",
