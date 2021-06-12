@@ -1,98 +1,77 @@
 import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useCallback } from "react";
-
-import MenuItem from "../menu/MenuItem";
-import ItemSlider from "../../components/ItemSlider";
-import { getMenuItemsIdAndCategory } from "../../common/selectors";
-import Contacts from "../Contacts";
-import Delivery from "../Delivery";
+import Header from "../Header";
+import Footer from "../Footer";
+import cn from "classnames";
 
 import "./style.scss";
 
-const Category = ({ name, toFull, items }) => (
-  <li className="home__category h-category">
-    <h2 className="mnt-m fz-48 h-category__heading">{name}</h2>
-    <Link
-      to={toFull}
-      className="mnt-m fz-14 orange orange-bd h-category__full-link"
-    >
-      Показати усі
-    </Link>
-    {items && items.length > 0 && (
-      <ItemSlider
-        spaceBetween={20}
-        className="h-category__items"
-        itemComponents={items}
-      />
-    )}
-  </li>
-);
-
-const Home = () => {
-  const items = useSelector(getMenuItemsIdAndCategory);
-  const sets = useCallback(() => {
-    return items
-      .filter((item) => item.category === "sets")
-      .map(({ id }) => <MenuItem className="home__menu-item" itemId={id} />);
-  }, [items]);
-  const rolls = useCallback(() => {
-    return items
-      .filter((item) => item.category === "rolls")
-      .map(({ id }) => <MenuItem className="home__menu-item" itemId={id} />);
-  }, [items]);
-  const sushi = useCallback(() => {
-    return items
-      .filter((item) => item.category === "sushi")
-      .map(({ id }) => <MenuItem className="home__menu-item" itemId={id} />);
-  }, [items]);
-  const soups = useCallback(() => {
-    return items
-      .filter((item) => item.category === "soups")
-      .map(({ id }) => <MenuItem className="home__menu-item" itemId={id} />);
-  }, [items]);
-  const drinks = useCallback(() => {
-    return items
-      .filter((item) => item.category === "drinks")
-      .map(({ id }) => <MenuItem className="home__menu-item" itemId={id} />);
-  }, [items]);
+const Home = ({ className }) => {
   return (
-    <div className="home">
-      <div className="home__banner "></div>
-      <menu className="home__menu">
-        <p className="mnt-b fz-60 home__menu-title">Топ позиції</p>
-        <p className="mnt fz-24 home__menu-tip">
-          Нижче Ви можете ознойомитися з нашим асориментом
-          <br /> вишуканих сетів,суші, супів та комбо - меню
-        </p>
-        <Category key="sets" name="Сети" toFull="/menu/sets" items={sets()} />
-        <Category
-          key="rolls"
-          name="Роли"
-          toFull="/menu/rolls"
-          items={rolls()}
-        />
-        <Category
-          key="sushi"
-          name="Суші"
-          toFull="/menu/sushi"
-          items={sushi()}
-        />
-        <Category
-          key="soups"
-          name="Супи"
-          toFull="/menu/soups"
-          items={soups()}
-        />
-        <Category
-          key="drinks"
-          name="Напої"
-          toFull="/menu/drinks"
-          items={drinks()}
-        />
-      </menu>
-      <Delivery className="home__delivery" />
-      <Contacts className="home__contacts" />
+    <div className={cn(className, "home")}>
+      <div className="home__wrapper">
+        <div className="home__banner banner">
+          <div className="banner__wrapper __container">
+            <Header className="home__header" />
+            <span className="banner__phone" />
+            <p className="banner__heading">
+              <b>Brainstorming</b> for
+              <br /> desired perfect Usability
+            </p>
+            <p className="banner__description">
+              Our design projects are fresh and simple and will benefit
+              <br /> your business greatly. Learn more about our work!
+            </p>
+            <Link to="/stats" className="banner__btn">
+              Views Stats
+            </Link>
+          </div>
+        </div>
+        <div className="home__content">
+          <p className="home__content-main-text">
+            Why{" "}
+            <b>
+              small business owners <br /> love
+            </b>{" "}
+            AppCo?
+          </p>
+          <p className="home__content-aux-text">
+            Our design projects are fresh and simple and will benefit your
+            business <br /> greatly. Learn more about our work!
+          </p>
+          <div className="flex-row home__cards">
+            <div className="home__card some-card">
+              <i className="some-card__icon icon-design" />
+              <p className="some-card__heading">Clean Design</p>
+              <p className="some-card__description">
+                Increase sales by showing true <br /> dynamics of your website.
+              </p>
+            </div>
+            <div className="home__card some-card">
+              <i className="some-card__icon icon-secure" />
+              <p className="some-card__heading">Secure Data</p>
+              <p className="some-card__description">
+                Build your online store’s trust using <br /> Social Proof &
+                Urgency.
+              </p>
+            </div>
+            <div className="home__card some-card">
+              <i className="some-card__icon icon-retina" />
+              <p className="some-card__heading">Retina Ready</p>
+              <p className="some-card__description">
+                Realize importance of social proof in <br /> customer’s purchase
+                decision.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="home__bottom">
+          <form className="home__email-input" onSubmit={() => {}}>
+            <input placeholder="Enter your email" type="text" />
+            <button type="submit">Subscribe</button>
+          </form>
+          <Footer className="home__footer" />
+        </div>
+      </div>
     </div>
   );
 };

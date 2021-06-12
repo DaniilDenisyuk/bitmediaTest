@@ -1,62 +1,148 @@
 .home {
   width: 100%;
-  &__menu {
+  &__header {
+    background-color: transparent;
+  }
+  &__wrapper {
+  }
+  &__banner {
+    padding-top: 1.5rem;
+  }
+  &__content {
+    display: flex;
+    padding: 1rem 0 8rem;
     text-align: center;
-    margin-top: 115px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &-main-text {
+      font-size: 2rem;
+    }
+    &-aux-text {
+      margin-top: 1.5rem;
+      color: #7e7e7e;
+      font-size: 1.25rem;
+    }
   }
-  &__menu-title {
-    font-family: MontserratBold;
-    color: #343434;
-    font-size: 60px;
-    margin-bottom: 30px;
+  &__footer {
+    background-color: transparent;
+    margin-top: auto;
+    margin-bottom: 1.8rem;
   }
-  &__menu-tip {
-    font-family: Montserrat;
-    color: #5a5a5a;
-    font-size: 24px;
+  &__email-input {
+    margin: 0 auto;
+    width: 480px;
+    height: 4rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    input {
+      height: 100%;
+      border: none;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+    button {
+      margin-right: 4px;
+      height: 3.5rem;
+      color: white;
+      border: none;
+      background: #3a80ba;
+      border-radius: 8px;
+      width: 11rem;
+    }
   }
-  &__category {
-    margin-top: 80px;
+  &__bottom {
+    height: 185px;
+    display: flex;
+    flex-direction: column;
+    background: url("../../assets/img/bottom-curve.png") top center/cover
+      no-repeat;
+  }
+  &__cards {
+    margin: 2.5rem -10px 0;
+    display: flex;
+    & > * {
+      margin: 0 10px;
+    }
   }
 }
 
-.h-category {
-  text-align: left;
-  position: relative;
+.banner {
+  height: 655px;
+  color: white;
+  background: url("../../assets/img/top-curve.png") top center/cover no-repeat;
+  &__wrapper {
+    height: 100%;
+    position: relative;
+  }
   &__heading {
-    font-family: MontserratMedium;
-    font-size: 48px;
-    color: #343434;
-    margin-bottom: 45px;
+    font-size: 3rem;
+    margin-top: 3rem;
   }
-  &__full-link {
-    font-family: MontserratMedium;
-    font-size: 14px;
-    padding-top: 12px;
-    padding-right: 12px;
-    &::before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      border-top: solid 1px #ff5d29;
-      border-right: solid 1px #ff5d29;
-    }
+  &__description {
+    font-size: (20rem/16);
+    margin-top: 1.5rem;
+  }
+  &__btn {
+    color: #3a80ba;
+    background-color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    width: 155px;
+    margin-top: 2rem;
+  }
+  &__phone {
+    display: block;
+    width: 321px;
+    height: 561px;
     position: absolute;
-    right: 0;
-    top: 0;
-    &:hover {
-      letter-spacing: -0.35px;
-      font-family: MontserratBold;
-      &::before {
-        border-top-width: 2px;
-        border-right-width: 2px;
-      }
-    }
+    bottom: 22px;
+    right: 109px;
+    background: url("../../assets/img/mobile.png") top center/cover no-repeat;
   }
-  &__items {
+}
+
+.some-card {
+  padding: 3rem 2rem;
+  width: 380px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__icon {
+    display: block;
+    width: 106px;
+    height: 96px;
+  }
+  &__heading {
+    font-family: msb;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  &__description {
+    margin-top: 1rem;
+    color: #7e7e7e;
+  }
+}
+
+.icon {
+  &-retina {
+    background: url("../../assets/img/retina.png") top center/cover no-repeat;
+  }
+  &-design {
+    background: url("../../assets/img/design.png") top center/cover no-repeat;
+  }
+  &-secure {
+    background: url("../../assets/img/secure.png") top center/cover no-repeat;
   }
 }

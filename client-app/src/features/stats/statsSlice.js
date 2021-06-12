@@ -1,135 +1,120 @@
-import { userDataService } from "../../services/statsService";
-import { favoritesReducer } from "./Favorites/favoritesSlice";
-import { historyReducer } from "./OrderHistory/historySlice";
-import { combineReducers } from "redux";
-import { authConstants } from "../auth/authSlice";
+import statsService from "../../services/statsService";
 
-const infoState = {
-  isLoading: false,
-  isSucceeded: true,
-  isFailed: false,
-  id: "",
-  email: "",
-  first_name: "",
-  last_name: "",
-  address: "",
-  phone: "",
-  town: "",
-  street: "",
-  house: "",
-  door: "",
+const statsState = {
+  isUsersLoading: false,
+  isUsersSucceeded: false,
+  isUsersFailed: false,
+  users: [],
+  usersId: [],
+  isStatsLoading: false,
+  isStatsSucceeded: false,
+  isStatsFailed: false,
+  usersStats: [],
 };
 
-export const infoConstants = {
-  getRequest: "user/info/getRequest",
-  getSucceeded: "user/info/getSucceeded",
-  getFailed: "user/info/getFailed",
-  updateRequest: "user/info/updateRequest",
-  updateSucceeded: "user/info/updateSucceeded",
-  updateFailed: "user/info/updateFailed",
+export const statsConstants = {
+  getUsersRequest: "stats/getUsersRequest",
+  getUsersSucceeded: "stats/getSucceeded",
+  getUsersFailed: "stats/getFailed",
+  getUserStatsRequest: "stats/getUserStatsRequest",
+  getUserStatsSucceeded: "stats/getUserStatsSucceeded",
+  getUserStatsFailed: "stats/getUserStatsFailed",
 };
 
-const infoReducer = (state = infoState, action) => {
+export const statsReducer = (state = statsState, action) => {
   switch (action.type) {
-    case authConstants.loginSucceeded: {
-      const {
-        id,
-        email,
-        first_name,
-        last_name,
-        address,
-        phone,
-        town,
-        street,
-        house,
-        door,
-      } = action.payload.user;
+    case statsConstants.getUsersRequest: {
       return {
         ...state,
-        id,
-        email,
-        first_name,
-        last_name,
-        address,
-        phone,
-        town,
-        street,
-        house,
-        door,
+        isUsersLoading: true,
       };
     }
-    case infoConstants.getRequest: {
-      return { isLoading: true };
+    case statsConstants.getUsersSucceeded: {
+      const { users } = action.payload;
+      return {
+        ...state,
+        isUsersLoading: false,
+        isUsersFailed: false,
+        isUsersSucceeded: true,
+        usersId: users.map((user) => user.id),
+        users,
+      };
     }
-    case infoConstants.getSucceeded: {
-      const { info } = action;
-      return { isSuccededed: true, ...info };
+    case statsConstants.getUsersFailed: {
+      return {
+        ...state,
+        isUsersLoading: false,
+        isUsersFailed: true,
+        isUsersSucceeded: false,
+      };
     }
-    case infoConstants.getFailed: {
-      return { isFailed: true };
+    case statsConstants.getUserStatsRequest: {
+      return { ...state, isUserStatsLoading: true };
     }
-    case infoConstants.updateRequest: {
-      return { isLoading: true };
+    case statsConstants.getUserStatsSucceeded: {
+      const { userStats } = action.payload;
+      return {
+        ...state,
+        isUserStatsLoading: false,
+        isUserStatsFailed: false,
+        isUserStatsSucceeded: true,
+        usersStats: state.usersStats.concat(userStats),
+      };
     }
-    case infoConstants.updateSucceeded: {
-      const { updatedInfo } = action;
-      return { isSuccededed: true, ...updatedInfo };
-    }
-    case infoConstants.updateFailed: {
-      return { isFailed: true };
+    case statsConstants.getUserStatsFailed: {
+      return {
+        ...state,
+        isUserStatsLoading: false,
+        isUserStatsFailed: true,
+        isUserStatsSucceeded: false,
+      };
     }
     default:
       return state;
   }
 };
 
-const getUserInfo = (token, userId) => {
+const getUsers = (from, to) => {
   const request = () => ({
-    type: infoConstants.getRequest,
+    type: statsConstants.getUsersRequest,
   });
-  const success = (user) => ({
-    type: infoConstants.getSucceeded,
-    user,
+  const success = (users) => ({
+    type: statsConstants.getUsersSucceeded,
+    payload: { users },
   });
   const failure = () => ({
-    type: infoConstants.getFailed,
+    type: statsConstants.getUsersFailed,
   });
   return (dispatch) => {
     dispatch(request());
-    return userDataService
-      .getUser(token, userId)
-      .then((userInfo) => dispatch(success(userInfo)))
+    return statsService
+      .getUsers(from, to)
+      .then((users) => dispatch(success(users)))
       .catch(() => dispatch(failure));
   };
 };
 
-const updateUserInfo = (token, fields) => {
+const getUserStats = (userId) => {
   const request = () => ({
-    type: infoConstants.updateRequest,
+    type: statsConstants.getUserStatsRequest,
   });
-  const success = (user) => ({
-    type: infoConstants.updateSucceeded,
-    user,
+  const success = (userStats) => ({
+    type: statsConstants.getUserStatsSucceeded,
+    payload: { userStats },
   });
   const failure = () => ({
-    type: infoConstants.updateFailed,
+    type: statsConstants.getUserStatsFailed,
   });
   return (dispatch) => {
     dispatch(request());
-    return userDataService
-      .updateUserInfo(token, fields)
-      .then((userInfo) => dispatch(success(userInfo)))
+    return statsService
+      .getUserStats(userId)
+      .then((userStats) => dispatch(success(userStats)))
       .catch(() => dispatch(failure));
   };
 };
 
-export const infoActions = {
-  getUserInfo,
-  updateUserInfo,
+export const statsActions = {
+  getUsers,
+  getUserStats,
 };
-
-export const userReducer = combineReducers({
-  info: infoReducer,
-  orderHistory: historyReducer,
-  favorites: favoritesReducer,
-});

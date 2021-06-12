@@ -14,6 +14,32 @@ img {
   height: 100%;
 }
 
+:root {
+  font-size: 100%;
+}
+
+body {
+  line-height: 1.225;
+}
+
+.flex-right {
+  margin-left: auto;
+}
+
+.flex-left {
+  margin-right: auto;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+b {
+  font-family: mb;
+}
+
 button {
   cursor: pointer;
 }
@@ -21,105 +47,14 @@ button {
   box-sizing: border-box !important;
 }
 
-.row {
-  display: flex;
+.__container {
+  margin: auto;
+  position: relative;
+  max-width: 1180px;
 }
 
-.mnt {
-  font-family: Monserrat;
-  &-sb {
-    font-family: MontserratSemiBold;
-  }
-  &-b {
-    font-family: MontserratBold;
-  }
-  &-m {
-    font-family: MontserratMedium;
-  }
-}
-
-.rbt {
-  font-family: Roboto;
-  &-b {
-    font-family: RobotoBold;
-  }
-  &-m {
-    font-family: RobotoMedium;
-  }
-}
-
-.fz {
-  &-60 {
-    font-size: 60px;
-  }
-  &-48 {
-    font-size: 48px;
-  }
-  &-36 {
-    font-size: 36px;
-  }
-  &-24 {
-    font-size: 24px;
-  }
-  &-18 {
-    font-size: 18px;
-  }
-  &-14 {
-    font-size: 14px;
-  }
-}
-
-.orange {
-  color: #ff5d29;
-  &-bd {
-    border-color: #ff5d29;
-  }
-  &-bg {
-    background-color: #ff5d29;
-  }
-}
-
-.fadein {
-  animation: fadein 0.3s linear forwards;
-}
-
-.fadeout {
-  animation: fadeout 0.3s linear forwards;
-}
-
-.dropin {
-  animation: dropin 0.2s linear forwards;
-}
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes dropin {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes dropout {
-  100% {
-    transform: translateY(-100%);
-  }
+.page-heading {
+  font-family: mb;
+  font-size: 2rem;
+  margin-top: 1.5rem;
 }

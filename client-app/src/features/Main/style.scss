@@ -4,16 +4,7 @@
   flex-direction: column;
   height: 100vh;
   background-color: #ffffff;
-  .content {
-    flex-grow: 1;
-  }
-}
-
-.__container {
-  display: flex;
-  justify-content: center;
-  > * {
-    max-width: 1360px;
-    padding: 0 30px;
+  & > * {
+    flex-shrink: 0;
   }
 }
