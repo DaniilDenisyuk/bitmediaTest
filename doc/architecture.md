@@ -26,3 +26,5 @@
    iiiii. index.js. Express.js server and root router.
 
 4. pagination solved with key-set pagination and cursors that sent beetween client and server.
+
+5. functionality: forward and backward pagination, date filtering, graphics with CanvasJS and so more
