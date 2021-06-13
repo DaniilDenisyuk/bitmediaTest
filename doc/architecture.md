@@ -21,8 +21,8 @@
    4. structure.sql. File with code about table structure.
 3. restApi:
 
-   1. common. Files that are not divided to some idea-specific folder
-   2. controllers. Files with express routers.
+   1. common. Files that are not divided to some idea-specific folder. There are Joi schemas for reques validations
+   2. controllers. Files with express routers. Requests are validated with validateRequest middleware and Joi schemas
    3. middleware. Files with express middleware functions
    4. services. Contains files that query specific database model.
    5. index.js. Express.js server and root router.
