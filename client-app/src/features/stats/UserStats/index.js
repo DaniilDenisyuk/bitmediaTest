@@ -73,7 +73,6 @@ const UserStats = ({ className }) => {
       })),
     [userStats]
   );
-  console.log(viewsStatsXY());
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(

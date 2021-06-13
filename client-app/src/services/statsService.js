@@ -1,4 +1,3 @@
-import { API_URL } from "./helpers/apiUrl";
 import handleResponse from "./helpers/handleResponse";
 
 export const statsService = (function () {
@@ -7,14 +6,14 @@ export const statsService = (function () {
       method: "GET",
       credentials: "include",
     };
-
-    const url = new URL("api/stats/users", API_URL);
-    url.search = new URLSearchParams({
-      startId,
-      amount,
-      direction,
-    }).toString();
-    return fetch(url.toString(), requestOptions).then(handleResponse);
+    return fetch(
+      `/api/stats/users?${new URLSearchParams({
+        startId,
+        amount,
+        direction,
+      }).toString()}`,
+      requestOptions
+    ).then(handleResponse);
   };
 
   const getUserStats = async (userId, from, to) => {
@@ -22,12 +21,13 @@ export const statsService = (function () {
       method: "GET",
       credentials: "include",
     };
-    const url = new URL(`api/stats/user/${userId}`, API_URL);
-    url.search = new URLSearchParams({
-      from,
-      to,
-    }).toString();
-    return fetch(url.toString(), requestOptions).then(handleResponse);
+    return fetch(
+      `/api/stats/user/${userId}?${new URLSearchParams({
+        from,
+        to,
+      }).toString()}`,
+      requestOptions
+    ).then(handleResponse);
   };
   return { getUsers, getUserStats };
 })();
